@@ -1,23 +1,25 @@
 <template>
-  <label> {{ title }}<template v-if="is_required">*</template> </label>
-  <div class="dd-wrapper" :class="[ ext_class, { 'active': modelValue, 'error' : error }]" @click="show = !show">
-    <p :class="{ 'error': error }"> {{ getLabel }} </p>
-    <slot name="icon-arrow" :class="{ 'rotate': show }" />
-    <template v-if="show">
-      <div class="options" :style="{ 'height' :  max_options * 5 + 'rem' }">
-        <div
-          v-for="(opt, i) of options"
-          :key="opt"
-          class="option"
-          :class="{ 'active' : modelValue == opt }"
-          :style="{ 'top': 5 * (i + 1) + 'rem' }"
-          @click="(e) => onOptionClick(e, opt)"
-        >
-        <p>{{ opt }}</p>
-        <slot v-if="modelValue == opt" name="icon-check" />
+  <div class="main-dd">
+    <label> {{ title }}<template v-if="is_required">*</template> </label>
+    <div class="dd-wrapper" :class="[ ext_class, { 'active': modelValue, 'error' : error }]" @click="show = !show">
+      <p :class="{ 'error': error }"> {{ getLabel }} </p>
+      <slot name="icon-arrow" :class="{ 'rotate': show }" />
+      <template v-if="show">
+        <div class="options" :style="{ 'height' :  max_options * 5 + 'rem' }">
+          <div
+            v-for="(opt, i) of options"
+            :key="opt"
+            class="option"
+            :class="{ 'active' : modelValue == opt }"
+            :style="{ 'top': 5 * (i + 1) + 'rem' }"
+            @click="(e) => onOptionClick(e, opt)"
+          >
+          <p>{{ opt }}</p>
+          <slot v-if="modelValue == opt" name="icon-check" />
+        </div>
       </div>
+      </template>
     </div>
-    </template>
   </div>
 </template>
 
@@ -53,10 +55,10 @@ const getLabel = computed(() => {
   let label = '';
 
   if ( props.error ) {
-    label = "Campo obbligatorio";
+    label = "Mandatory field";
   } else {
     if ( !props.modelValue ) {
-      label = "Seleziona una opzione";
+      label = "Select an option";
     } else {
       label = props.display_uppercase ? props.modelValue.toUpperCase() : props.modelValue;
     }
@@ -98,6 +100,7 @@ $transition-medium: 400ms;
   border: 0.2rem solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   user-select: none;
+  background-color: rgb(113, 229, 113);
   &.active {
     border: 0.2rem solid $primary;
   }
@@ -123,6 +126,7 @@ $transition-medium: 400ms;
     box-shadow: rgba(0, 0, 0, 0.25) 0 1.4rem 2.8rem, rgba(0, 0, 0, 0.22) 0 1rem 1rem;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    color: #eee;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -133,7 +137,7 @@ $transition-medium: 400ms;
       justify-content: space-between;
       height: 52px;
       box-sizing: border-box;
-      background-color: #222;
+      background-color: #999;
       transition-duration: $transition-medium;
       &:hover {
         filter: brightness(110%);

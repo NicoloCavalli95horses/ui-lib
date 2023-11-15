@@ -1,6 +1,6 @@
 {
-  "name": "nicolo_cavalli_lib_test",
-  "version": "0.0.21",
+  "name": "nicolo_cavalli_ui_lib",
+  "version": "0.0.01",
   "type": "module",
   "files": ["dist"],
   "main": "./dist/lib.umd.cjs",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "sass": "^1.69.5",
-    "vue": "^3.3.4"
+    "vue": "^3.3.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
