@@ -1,6 +1,29 @@
-# Vue 3 + Vite
+# How to use this library
+1) Install with `npm i nicolo_cavalli_ui_lib`
+2) In the root `index.html` import the CSS:
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      ...
+     <link rel="stylesheet" href="../node_modules/nicolo_cavalli_ui_lib/dist/style.css" />
+  </head>
+  <body> ... </body>
+</html>
+```
+4) In a `.vue` file, import the library components you need and use them in the template:
+```html
+<template>
+  ...
+  <Btn> click me </Btn>
+  ...
+<template/>
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<script setup>
+import { Btn } from 'nicolo_cavalli_ui_lib';
+
+<script />
+```
 
 ## Recommended IDE Setup
 
