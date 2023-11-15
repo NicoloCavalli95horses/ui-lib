@@ -1,0 +1,27 @@
+{
+  "name": "nicolo_cavalli_lib_test",
+  "version": "0.0.21",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/lib.umd.cjs",
+  "module": "./dist/lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "sass": "^1.69.5",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.4.5"
+  }
+}
