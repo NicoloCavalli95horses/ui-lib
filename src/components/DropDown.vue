@@ -2,7 +2,7 @@
   <div class="main-dd">
     <div class="dd-wrapper" :class="{ 'error' : error }" @click="show = !show">
       <p :class="{ 'error': error }">{{ active_item?.val ? active_item.val : placeholder }}</p>
-      ⬇️
+      <svg :class="{ 'rotate' : show }"><use href="#arrow-right"></use></svg>
     
       <template v-if="show">
         <div class="items" :style="{ 'max-height' :  `calc(${max_options} * ${ DD_HEIGHT }` }">
@@ -14,7 +14,7 @@
             @click="(e) => onClick(e, item)"
           >
             <p>{{ item.val }}</p>
-            <template v-if="active_id == item.id">👌</template>
+            <svg v-if="active_id == item.id"><use href="#check"></use></svg>
           </div>
         </div>
       </template>
@@ -97,6 +97,7 @@ function onClick(e, item) {
   cursor: pointer;
   user-select: none;
   background-color: var(--background);
+
   &.error {
     border: 0.2rem solid var(--error);
   }
@@ -138,7 +139,6 @@ function onClick(e, item) {
       }
       p {
         margin-left: 1.8rem;
-        text-transform: uppercase;
         &.error {
           color: var(--error);
         }

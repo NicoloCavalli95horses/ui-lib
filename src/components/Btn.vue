@@ -62,7 +62,7 @@ defineProps({
 
 const emit = defineEmits([
   'click',
-  'cancelled'
+  'cancel'
 ])
 
 
@@ -84,7 +84,7 @@ function onClick(e) {
 
 function onMouseleave(e) {
   if ( mouse.down ) {
-    emit('cancelled', e);
+    emit('cancel', e);
   }
 }
 
