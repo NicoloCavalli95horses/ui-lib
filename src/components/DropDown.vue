@@ -1,23 +1,22 @@
 <template>
   <div class="main-dd">
-    <label> {{ title }}<template v-if="is_required">*</template> </label>
-    <div class="dd-wrapper" :class="[ ext_class, { 'active': modelValue, 'error' : error }]" @click="show = !show">
-      <p :class="{ 'error': error }"> {{ getLabel }} </p>
-      <slot name="icon-arrow" :class="{ 'rotate': show }" />
+    <div class="dd-wrapper" :class="{ 'error' : error }" @click="show = !show">
+      <p :class="{ 'error': error }">{{ active_item?.val ? active_item.val : placeholder }}</p>
+      ⬇️
+    
       <template v-if="show">
-        <div class="options" :style="{ 'height' :  max_options * 5 + 'rem' }">
+        <div class="items" :style="{ 'max-height' :  `calc(${max_options} * ${ DD_HEIGHT }` }">
           <div
-            v-for="(opt, i) of options"
-            :key="opt"
-            class="option"
-            :class="{ 'active' : modelValue == opt }"
-            :style="{ 'top': 5 * (i + 1) + 'rem' }"
-            @click="(e) => onOptionClick(e, opt)"
+            v-for="item of items"
+            :key="item.id"
+            class="item"
+            :class="{ 'active' : active_id == item.id }"
+            @click="(e) => onClick(e, item)"
           >
-          <p>{{ opt }}</p>
-          <slot v-if="modelValue == opt" name="icon-check" />
+            <p>{{ item.val }}</p>
+            <template v-if="active_id == item.id">👌</template>
+          </div>
         </div>
-      </div>
       </template>
     </div>
   </div>
@@ -27,129 +26,122 @@
 // ==============================
 // Import
 // ==============================
-import { computed, ref } from "vue";
+import {
+  ref,
+} from "vue";
 
 
 // ==============================
 // Props
 // ==============================
 const props = defineProps({
-  modelValue: [String, Number],
+  active_id: [String, Number],
+  placeholder: {
+    type: String,
+    default: () => 'Select an option'
+  },
   title: String,
+  items: Array,
   error: Boolean,
-  options: Array,
-  is_required: Boolean,
-  display_uppercase: Boolean,
-  ext_class: String,
-  max_options: Number
+  max_options: {
+    type: Number,
+    default: 3,
+  }
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits([
+  "update:active_id",
+  "unselect",
+]);
 
 
 // ==============================
 // Consts
 // ==============================
-const show = ref(false);
-const getLabel = computed(() => {
-  let label = '';
-
-  if ( props.error ) {
-    label = "Mandatory field";
-  } else {
-    if ( !props.modelValue ) {
-      label = "Select an option";
-    } else {
-      label = props.display_uppercase ? props.modelValue.toUpperCase() : props.modelValue;
-    }
-  }
-
-  return label;
-});
+const DD_HEIGHT   = '5.2rem';
+const show        = ref( false );
+const active_item = ref( {} );
 
 
 // ==============================
 // Functions
 // ==============================
-function onOptionClick(e, option) {
+function onClick(e, item) {
   e.stopPropagation();
   show.value = false;
-  emit("update:modelValue", option);
+  if ( props.active_id == item.id ) {
+    emit('unselect');
+    emit("update:active_id", null);
+    active_item.value = {};
+  } else {
+    active_item.value = item;
+    emit("update:active_id", item.id);
+  }
 }
 
 
 </script>
 
 <style lang="scss" scoped>
-$radius-m: 12px;
-$primary: green;
-$error-color: red;
-$transition-medium: 400ms;
-
 .dd-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-width: 300px;
-  height: 52px;
+  min-width: 30rem;
+  height: v-bind('DD_HEIGHT');
   padding: 0 1.5rem;
   box-sizing: border-box;
-  border-radius: $radius-m;
-  border: 0.2rem solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-m);
   cursor: pointer;
   user-select: none;
-  background-color: rgb(113, 229, 113);
-  &.active {
-    border: 0.2rem solid $primary;
-  }
+  background-color: var(--background);
   &.error {
-    border: 0.2rem solid $error-color;
+    border: 0.2rem solid var(--error);
   }
   .rotate {
-    transition-duration: $transition-medium;
+    transition-duration: var(--transition-medium);
     transform: rotate(90deg);
   }
   p {
     &.error {
-      color: $error-color;
+      color: var(--error);
     }
   }
-  .options {
+  .items {
     position: absolute;
     width: 100%;
-    top: calc( 100% + 12px);
+    top: calc( 100% + 1.2rem);
     left: 0;
     z-index: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+    border-radius: var(--radius-s);
     box-shadow: rgba(0, 0, 0, 0.25) 0 1.4rem 2.8rem, rgba(0, 0, 0, 0.22) 0 1rem 1rem;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    color: #eee;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    color: var(--font-light);
 
-    .option {
+    .item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 52px;
+      height: v-bind('DD_HEIGHT');
       box-sizing: border-box;
-      background-color: #999;
-      transition-duration: $transition-medium;
+      background-color: var(--background-05);
+      transition-duration: var(--transition-medium);
       &:hover {
         filter: brightness(110%);
-        background-color: $primary;
-        transition-duration: $transition-medium;
+        background-color: var(--primary);
+        transition-duration: var(--transition-medium);
       }
       &.active {
-        background-color: $primary !important;
+        background-color: var(--primary);
       }
       p {
         margin-left: 1.8rem;
         text-transform: uppercase;
+        &.error {
+          color: var(--error);
+        }
       }
     }
   }
