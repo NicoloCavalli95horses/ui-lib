@@ -25,3 +25,9 @@ import { Btn } from 'nicolo_cavalli_ui_lib';
 
 <script />
 ```
+
+## Available components
+- Btn
+- Checkbox
+- DropDown
+- SwitchBtn
