@@ -18,7 +18,9 @@
     </div>
     <div class="flex-center start top-12">
       <p class="r-24">Round button:</p>
-      <Btn :round="true" :def="true">🐧</Btn>
+      <Btn :round="true" :def="true">
+        <svg><use href="#plus"></use></svg>
+      </Btn>
     </div>
 
     <h3 id="switch-btn">Switch button</h3>

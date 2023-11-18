@@ -13,8 +13,8 @@
             :class="{ 'active' : active_id == item.id }"
             @click="(e) => onClick(e, item)"
           >
-            <p>{{ item.val }}</p>
-            <svg v-if="active_id == item.id"><use href="#check"></use></svg>
+            <p class="l-12">{{ item.val }}</p>
+            <svg v-if="active_id == item.id" class="r-12"><use href="#check"></use></svg>
           </div>
         </div>
       </template>
@@ -138,7 +138,6 @@ function onClick(e, item) {
         background-color: var(--primary);
       }
       p {
-        margin-left: 1.8rem;
         &.error {
           color: var(--error);
         }

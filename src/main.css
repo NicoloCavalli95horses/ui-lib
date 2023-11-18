@@ -77,12 +77,6 @@
   left: 2.2rem;
 }
 
-svg {
-  color: var(--font-light);
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
 .full-flex {
   width: 100%;
   height: 100vh;
@@ -287,11 +281,6 @@ code {
   opacity: 0;
 }
 
-svg {
-  width: 4rem;
-  font-size: 4rem;
-}
-
 .no-overflow {
   overflow: hidden;
 }
@@ -357,11 +346,13 @@ svg {
   }
 }
 
+svg {
+  color: var(--font-light);
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
 .svg-18 {
   width: 1.8rem;
   height: 1.8rem;
-}
-.svg-24 {
-  width: 2.4rem;
-  height: 2.4rem;
 }

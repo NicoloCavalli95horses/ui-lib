@@ -8,6 +8,7 @@
       'disabled': disabled,
       'default': def,
       'round' : round,
+      'down' : mouse.down
     }"
 
     @click="onClick"
@@ -204,6 +205,10 @@ button {
   &.round {
     padding: 1.2rem;
     border-radius: 50%;
+  }
+
+  &.down {
+    transform: scale(0.9);
   }
 }
 </style>
