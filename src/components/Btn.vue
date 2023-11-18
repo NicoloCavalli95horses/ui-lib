@@ -86,6 +86,7 @@ function onClick(e) {
 function onMouseleave(e) {
   if ( mouse.down ) {
     emit('cancel', e);
+    mouse.down = false;
   }
 }
 

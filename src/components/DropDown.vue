@@ -127,7 +127,7 @@ function onClick(e, item) {
       justify-content: space-between;
       height: v-bind('DD_HEIGHT');
       box-sizing: border-box;
-      background-color: var(--background-05);
+      background-color: var(--background);
       transition-duration: var(--transition-medium);
       &:hover {
         filter: brightness(110%);
