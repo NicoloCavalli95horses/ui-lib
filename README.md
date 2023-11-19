@@ -31,3 +31,4 @@ import { Btn } from 'nicolo_cavalli_ui_lib';
 - Checkbox
 - DropDown
 - SwitchBtn
+- Modal
