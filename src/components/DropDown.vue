@@ -3,21 +3,18 @@
     <div class="dd-wrapper" :class="{ 'error' : error }" @click="show = !show">
       <p :class="{ 'error': error }">{{ active_item?.val ? active_item.val : placeholder }}</p>
       <svg :class="{ 'rotate' : show }"><use href="#arrow-right"></use></svg>
-    
-      <template v-if="show">
-        <div class="items" :style="{ 'max-height' :  `calc(${max_options} * ${ DD_HEIGHT }` }">
-          <div
-            v-for="item of items"
-            :key="item.id"
-            class="item"
-            :class="{ 'active' : active_id == item.id }"
-            @click="(e) => onClick(e, item)"
-          >
-            <p class="l-12">{{ item.val }}</p>
-            <svg v-if="active_id == item.id" class="r-12"><use href="#check"></use></svg>
-          </div>
+      <div v-if="show" class="items" :style="{ 'max-height' :  `calc(${max_options} * ${ DD_HEIGHT }` }">
+        <div
+          v-for="item of items"
+          :key="item.id"
+          class="item"
+          :class="{ 'active' : active_id == item.id }"
+          @click="(e) => onClick(e, item)"
+        >
+          <p class="l-12">{{ item.val }}</p>
+          <svg v-if="active_id == item.id" class="r-12"><use href="#check"></use></svg>
         </div>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -97,7 +94,6 @@ function onClick(e, item) {
   cursor: pointer;
   user-select: none;
   background-color: var(--background);
-
   &.error {
     border: 0.2rem solid var(--error);
   }
@@ -118,7 +114,7 @@ function onClick(e, item) {
     z-index: 1;
     overflow-y: auto;
     border-radius: var(--radius-s);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 1.4rem 2.8rem, rgba(0, 0, 0, 0.22) 0 1rem 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 0.4rem 1.2rem, rgba(0, 0, 0, 0.22) 0 0.2rem 0.2rem;
     color: var(--font-light);
 
     .item {

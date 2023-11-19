@@ -32,6 +32,18 @@
 
       <h3 id="checkbox">Checkbox</h3>
       <Checkbox v-model:active="checkbox"><p>Status: {{ checkbox }}</p></Checkbox>
+
+      <h3 id="modal">Modal</h3>
+      <Btn @click="show_modal = true">Open modal</Btn>
+      <Modal v-if="show_modal" :click_out_close="true" @close="show_modal = false">
+        <template #header>
+          Default &lt;h3&gt; title
+        </template>
+        <p>The width and the height of the modal depends on the content by default. Force new width and height using the props: <br><br><code>:width :height :min_width :min_heigth :full_size</code></p>
+        <template #footer>
+          <Btn @click="show_modal= false">close</Btn>
+        </template>
+      </Modal>
     </div>
   </div>
 </template>
@@ -45,6 +57,7 @@ import {
 } from 'vue';
 
 import Btn       from '../components/Btn.vue';
+import Modal     from '../components/Modal.vue';
 import DropDown  from '../components/DropDown.vue';
 import Checkbox  from '../components/Checkbox.vue';
 import SwitchBtn from '../components/SwitchBtn.vue';
@@ -62,9 +75,10 @@ const dropdown_items = [
   { id: 6, val: 'Option F'},
   { id: 7, val: 'Option G'}
 ];
-const dropdown_id = ref( 1 );
+const dropdown_id = ref( undefined );
 const switch_btn  = ref( false );
 const checkbox    = ref( false );
+const show_modal  = ref( false );
 
 </script>
 
