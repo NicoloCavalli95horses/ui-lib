@@ -72,10 +72,11 @@ function resetHandlePosition() {
 }
 
 function mapNumber(value, inMin, inMax, outMin, outMax) {
-  const clampedValue = Math.min(Math.max(value, inMin), inMax);
-  const percentage = (clampedValue - inMin) / (inMax - inMin);
-  return percentage * (outMax - outMin) + outMin;
+  const val = Math.min(Math.max(value, inMin), inMax);
+  const out = (val - inMin) / (inMax - inMin);
+  return out * (outMax - outMin) + outMin;
 }
+
 
 // ==============================
 // Life cycle
@@ -95,13 +96,15 @@ onUnmounted( () => {
 </script>
 
 <style lang="scss" scoped>
+$size: 120px;
 .joystick-main {
-  width: 100%;
-  height: 100%;
+  width: $size;
+  height: $size;
   border-radius: 50%;
   border: 1px solid var(--white);
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
   .cursor {
     width: 38.19%;
     height: 38.19%;
@@ -110,6 +113,16 @@ onUnmounted( () => {
     top: 50%;
     left: 50%;
     background-color: var(--white);
+    box-shadow: 1px 1px var(--black);
+    &::before {
+      content: '';
+      width: $size;
+      height: $size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 </style>

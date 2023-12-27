@@ -55,6 +55,7 @@
 /* Root font-size: 1rem = 10px */
 html {
   font-size: 10px;
+  user-select: none;
 }
 
 /* Font */
