@@ -3,7 +3,7 @@
   "version": "0.0.24",
   "license": "MIT",
   "description": "Library of base UI components",
-  "keywords": ["component", "library", "vue"],
+  "keywords": ["component", "library", "vue", "ui", "design"],
   "type": "module",
   "files": ["dist"],
   "main": "./dist/lib.umd.cjs",

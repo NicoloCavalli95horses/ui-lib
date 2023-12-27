@@ -15,7 +15,7 @@
           <h3>
             <slot name="header" />
           </h3>
-          <div class="pointer" @click="emit('close')">
+          <div v-if="close_btn" class="pointer" @click="emit('close')">
             <svg><use href="#x"></use></svg>
           </div>
         </header>
@@ -45,7 +45,6 @@ import {
 // Props
 // ==============================
 const props = defineProps({
-  title: String,
   width: String,
   height: String,
   max_width: String,
@@ -55,8 +54,6 @@ const props = defineProps({
   click_out_close: Boolean,
   full_size: Boolean,
   close_btn: Boolean,
-  no_scrollbar: Boolean,
-  no_scrollable_padding: Boolean,
 });
 
 const emit = defineEmits([

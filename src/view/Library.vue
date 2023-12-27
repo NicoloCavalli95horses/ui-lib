@@ -4,6 +4,9 @@
     <h2>Use this page to test the components of the library</h2>
 
     <div class="list">
+      <h3 id="joystick">Joystick</h3>
+      <div style="width: 100px; height: 100px;"><Joystick /></div>
+
       <h3 id="button">Button</h3>
       <div class="flex-center start">
         <p class="r-24">Default button:</p>
@@ -61,6 +64,7 @@ import Modal     from '../components/Modal.vue';
 import DropDown  from '../components/DropDown.vue';
 import Checkbox  from '../components/Checkbox.vue';
 import SwitchBtn from '../components/SwitchBtn.vue';
+import Joystick  from '../components/Joystick.vue';
 
 
 // ==============================
